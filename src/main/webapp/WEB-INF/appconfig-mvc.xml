@@ -1,0 +1,42 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+        <context:annotation-config> declares support for general annotations such as
+        @Required, @Autowired, @PostConstruct, and so on.
+    -->
+
+
+    <!--
+        <mvc:annotation-driven /> - declares explicit support for annotation-driven MVC
+        controllers (i.e. @RequestMapping, @Controller, although support for those is
+        the default behaviour), as well as adding support for declarative validation via
+        @Valid and message body marshalling with @RequestBody/ResponseBody.
+    -->
+    <mvc:annotation-driven/>
+
+
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
+
+    <!--Сообщений для инвалидации-->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>classpath:validation</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix">
+            <value>/WEB-INF/views/</value>
+        </property>
+        <property name="suffix">
+            <value>.jsp</value>
+        </property>
+    </bean>
+
+</beans>
