@@ -43,4 +43,9 @@ public class UserServiceImpl implements UserService
     public User findByUsername(String username) {
         return userDao.findByUsername(username);
     }
+
+    @Override
+    public List<User> findAll() {
+        return userDao.findAll();
+    }
 }
