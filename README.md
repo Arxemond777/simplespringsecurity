@@ -26,4 +26,8 @@ URL<br>
 /api/xml/studentlist - еще одна тестовая XML-ка<br>
 
 **CRUD**<br>
+Resources<br>
+src/main/resources/books.sql<br>
+
+URL<br>
 /books/books - точка входа в CRUD

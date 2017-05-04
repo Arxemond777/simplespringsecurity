@@ -22,7 +22,7 @@
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <!--Where is model?-->
-        <property name="packagesToScan" value="net.proselyte.springsecurityapp.model"/>
+        <property name="packagesToScan" value="net.arxemond.springsecurityapp.model"/>
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
         </property>
@@ -44,5 +44,5 @@
     <tx:annotation-driven/>
 
     <!--Step 0 - where is DAO location-->
-    <jpa:repositories base-package="net.proselyte.springsecurityapp.dao"/>
+    <jpa:repositories base-package="net.arxemond.springsecurityapp.dao"/>
 </beans>

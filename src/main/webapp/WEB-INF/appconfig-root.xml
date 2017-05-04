@@ -14,7 +14,7 @@
     <!--Конфиг для Security-->
     <import resource="appconfig-security.xml"/>
 
-    <context:component-scan base-package="net.proselyte.springsecurityapp.*"/>
+    <context:component-scan base-package="net.arxemond.springsecurityapp.*"/>
 
     <!--Св-а БД-->
     <context:property-placeholder location="classpath:database.properties"/>

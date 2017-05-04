@@ -38,7 +38,7 @@
 
     <!--Для authenticationManager-->
     <beans:bean id="userDetailsServiceImpl"
-                class="net.proselyte.springsecurityapp.service.UserDetailsServiceImpl">
+                class="net.arxemond.springsecurityapp.service.UserDetailsServiceImpl">
     </beans:bean>
 
     <!--Кодировщик для паролей-->
