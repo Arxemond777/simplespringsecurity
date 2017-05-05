@@ -24,6 +24,7 @@ URL<br>
 /api/json/{name} - просто тестовая JSON-ка с различными формами выовда из БД<br>
 /api/xml/student - просто тестовая XML-ка<br>
 /api/xml/studentlist - еще одна тестовая XML-ка<br>
+/api/xmlORjson
 
 **CRUD**<br>
 Resources<br>
@@ -31,3 +32,6 @@ src/main/resources/books.sql<br>
 
 URL<br>
 /books/books - точка входа в CRUD
+
+Test<br>
+src/test/java/net/arxemond/bookmanager/BookControllerTests.java  - простенький (Unit-test) Mock 

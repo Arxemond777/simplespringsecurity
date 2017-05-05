@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class BookController
@@ -23,11 +24,13 @@ public class BookController
     }
 
     @RequestMapping(value = "/books", method = RequestMethod.GET)
-    public String listBooks(Model model) {
+    public ModelAndView listBooks(Model model) {
+        System.out.println(12312);
         model.addAttribute("book", new Book());
         model.addAttribute("listBooks", this.bookService.listBooks()); // Вызываем метод (listBooks) через bookService
 
-        return "books";
+        return new ModelAndView("books");
+        //return "books";
     }
 
     /**
