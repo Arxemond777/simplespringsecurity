@@ -58,15 +58,6 @@
         <property name="bookDao" ref="bookDao"/>
     </bean>
 
-    <bean id="jedisConnFactory"
-          class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
-          p:use-pool="true"/>
-
-    <!-- redis template definition -->
-    <bean id="redisTemplate"
-          class="org.springframework.data.redis.core.RedisTemplate"
-          p:connection-factory-ref="jedisConnFactory"/>
-
     <context:component-scan base-package="net.arxemond.bookmanager"/>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
@@ -74,6 +65,18 @@
     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </bean>
+
+    <!--<bean id="jedisConnFactory"
+          class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+          p:use-pool="true"
+          p:host-name="localhost"
+          p:port="6379"
+          p:database="0"
+    />
+
+    <bean id="redisTemplate"
+          class="org.springframework.data.redis.core.RedisTemplate"
+          p:connection-factory-ref="jedisConnFactory"/>-->
 
     <mvc:default-servlet-handler/>
     <mvc:annotation-driven/>

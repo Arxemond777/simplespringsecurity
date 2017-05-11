@@ -16,6 +16,7 @@
         the default behaviour), as well as adding support for declarative validation via
         @Valid and message body marshalling with @RequestBody/ResponseBody.
     -->
+
     <mvc:annotation-driven/>
 
 

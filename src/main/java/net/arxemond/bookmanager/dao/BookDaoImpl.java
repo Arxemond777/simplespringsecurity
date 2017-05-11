@@ -24,6 +24,7 @@ public class BookDaoImpl implements BookDao
     public void addBook(Book book) {
         Session session = this.sessionFactory.getCurrentSession(); // Получаем текущие сессию
         session.persist(book);
+
         logger.info("Book successfully saved. Book details: " + book);
     }
 
@@ -31,13 +32,14 @@ public class BookDaoImpl implements BookDao
     public void updateBook(Book book) {
         Session session = this.sessionFactory.getCurrentSession();
         session.update(book);
+
         logger.info("Book successfully update. Book details: " + book);
     }
 
     @Override
-    public void removeBook(int id) {
+    public void removeBook(Long id) {
         Session session = this.sessionFactory.getCurrentSession();
-        Book book = (Book) session.load(Book.class, new Integer(id));
+        Book book = (Book) session.load(Book.class, new Long(id));
 
         if (book != null) // Если существует
             session.delete(book);
@@ -46,9 +48,10 @@ public class BookDaoImpl implements BookDao
     }
 
     @Override
-    public Book getBookById(int id) {
+    public Book getBookById(Long id) {
         Session session = this.sessionFactory.getCurrentSession();
-        Book book = (Book) session.load(Book.class, new Integer(id));
+        Book book = (Book) session.load(Book.class, new Long(id));
+
         logger.info("Book successfully loaded. Book details: " + book);
 
         return book;
@@ -62,7 +65,6 @@ public class BookDaoImpl implements BookDao
 
         for (Book book : bookList)
             logger.info("Book list: " + book);
-
 
         return bookList;
     }

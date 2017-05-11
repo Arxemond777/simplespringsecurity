@@ -2,6 +2,8 @@ package net.arxemond.bookmanager.controller;
 
 import net.arxemond.bookmanager.model.Book;
 import net.arxemond.bookmanager.service.BookService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class BookController
 {
+    private static final Logger logger = LoggerFactory.getLogger(BookController.class);
+
     private BookService bookService;
 
     @Autowired(required = true)
@@ -25,12 +29,10 @@ public class BookController
 
     @RequestMapping(value = "/books", method = RequestMethod.GET)
     public ModelAndView listBooks(Model model) {
-        System.out.println(12312);
         model.addAttribute("book", new Book());
         model.addAttribute("listBooks", this.bookService.listBooks()); // Вызываем метод (listBooks) через bookService
 
         return new ModelAndView("books");
-        //return "books";
     }
 
     /**
@@ -39,24 +41,25 @@ public class BookController
      */
     @RequestMapping(value = "/books/add", method = RequestMethod.POST)
     public String addBook(@ModelAttribute("book") Book book) {
-        if (book.getId() == 0) // Если id == 0 - то add
+        System.out.println(book);
+
+        if (book.getId() == null) // Если id == 0 - то add. TODO сменил тип id с int на Long, поэтому терь если null
             this.bookService.addBook(book);
          else  // Иначе update
-            this.bookService.updateBook(book);
-
+            this.bookService.updateBook(book.getId(), book);
 
         return "redirect:/books/books";
     }
 
     @RequestMapping("/remove/{id}")
-    public String removeBook(@PathVariable("id") int id) {
+    public String removeBook(@PathVariable("id") Long id) {
         this.bookService.removeBook(id);
 
         return "redirect:/books/books";
     }
 
     @RequestMapping("/edit/{id}")
-    public String editBook(@PathVariable("id") int id, Model model) {
+    public String editBook(@PathVariable("id") Long id, Model model) {
         model.addAttribute("book", this.bookService.getBookById(id));
         model.addAttribute("listBooks", this.bookService.listBooks());
 
@@ -64,7 +67,7 @@ public class BookController
     }
 
     @RequestMapping("/bookdata/{id}")
-    public String bookData(@PathVariable("id") int id, Model model) {
+    public String bookData(@PathVariable("id") Long id, Model model) {
         model.addAttribute("book", this.bookService.getBookById(id));
 
         return "bookdata";

@@ -1,15 +1,16 @@
 package net.arxemond.bookmanager.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "BOOK")
-public class Book
+public class Book implements Serializable
 {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(name = "BOOK_TITLE")
     private String bookTitle;
@@ -20,11 +21,11 @@ public class Book
     @Column(name = "BOOK_PRICE")
     private int price;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
