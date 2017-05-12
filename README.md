@@ -34,4 +34,14 @@ URL<br>
 /books/books - точка входа в CRUD
 
 Test<br>
-src/test/java/net/arxemond/bookmanager/BookControllerTests.java  - простенький (Unit-test) Mock 
+src/test/java/net/arxemond/bookmanager/BookControllerTests.java  - простенький (Unit-test) Mock
+ 
+Redis<br>
+src/main/resources/redis.properties - конфиги <br>
+На /books/bookdata/{id} редис, по delete он удаляется, 
+по edit - так же удаляется, при заходе пишется новый и остается.<br>
+
+RabbitMQ<br>
+src/test/java/net/arxemond/rabbitMQ - просто сконфижил раббита<br>
+
+net.arxemond.rabbitMQ.HelloWorldConfiguration - конфигурация<br>

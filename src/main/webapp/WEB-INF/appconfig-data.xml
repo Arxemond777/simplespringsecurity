@@ -19,6 +19,20 @@
     </bean>
 
     <!--Step 3-->
+    <!--
+        Настраивается с DataSource для использования Hibernate в качестве JPA адаптера
+
+        Дает полный котроль над конфигурацией EntityManagerFactory. LocalContainerEntityManagerFactoryBean
+        создает PersistenceUnitInfo основанный на persistence.xml файле. Таким образом, возможно работать с
+        различными DataSources.
+
+        LocalContainerEntityManagerFactoryBean имеет свойство dataSource и jpaVendorAdapter.
+        setJpaVendorAdapter определяет реализацию для JPA. Пояснение: JPA - это спецификация, для нее нужна
+        реализация. Из кода видно, что реализацией является HibernateJpaVendorAdapter. По документации
+        HibernateJpaVendorAdapter extends AbstractJpaVendorAdapter. Суть в том, что в
+        этом коде Hibernate выступает как реализация JPA провайдера.
+        В него мы подаем HibernateJpaVendorAdapter - предоставляем провайдера и EntityManager
+    -->
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <!--Where is model?-->
@@ -28,8 +42,27 @@
         </property>
         <property name="jpaProperties">
             <props>
+                <!--Источник данных-->
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
+
+                <!--398-->
+                <!--
+                    max_fetch_depth - Устанавливает максимальную "глубину" дерева выборки данных с использованием
+                    внешних соединений для неколлекционных ассоциаций (one-to-one, many-to-one). 0 отключает выборку
+                    данных по умолчанию с использованием внешних соединений (по умолчанию неограничена). Set a
+                    maximum "depth" for the outer join fetch tree for single-ended associations (one-to-one, many-to-one).
+                    A 0 disables default outer join fetching.например рекомендованны значения между 0 и 3
+                -->
+                <prop key="hibernate.max_fetch_depth">3</prop>
+
+                <!--
+                    Это сколько за раз драйвер выгребает строк, чтоб потом кормить их после вызова rs.next().
+                    Если ставите, например 10, то он будет после каждых 10 строк бегать в БД и тащить следующую пачку.
+                -->
+                <prop key="hibernate.jdbc.fetch_size">50</prop>
+                <!--Разрешение для пакетной обработки-->
+                <prop key="hibernate.jdbc.batch_size">10</prop>
             </props>
         </property>
     </bean>
