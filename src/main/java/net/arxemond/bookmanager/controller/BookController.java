@@ -27,8 +27,18 @@ public class BookController
         this.bookService = bookService;
     }
 
+    @RequestMapping(value = "/books_diagram", method = RequestMethod.GET)
+    public ModelAndView listBooksDiagram(/*Model model*/) {
+        /*model.addAttribute("book", new Book());
+        model.addAttribute("listBooks", this.bookService.listBooks()); // Вызываем метод (listBooks) через bookService
+        System.out.println(1);*/
+
+        return new ModelAndView("booksDiagram");
+    }
+
     @RequestMapping(value = "/books", method = RequestMethod.GET)
     public ModelAndView listBooks(Model model) {
+        System.out.println(2);
         model.addAttribute("book", new Book());
         model.addAttribute("listBooks", this.bookService.listBooks()); // Вызываем метод (listBooks) через bookService
 
